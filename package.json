@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "lint": "find js -regex \".*\\.jsx\" | xargs node_modules/.bin/jsxhint -c ~/.jshintrc",
+    "lint": "echo 'js\\njsx' |xargs -Isfx find js -name *.sfx |xargs node_modules/.bin/jsxhint -c ~/.jshintrc",
     "publish": "PATH=node_modules/.bin:$PATH gulp build && cd dist && uglify -s app.js -o app.js && uglify -s vendor.js -o vendor.js",
     "watch": "node_modules/.bin/gulp"
   },
