@@ -1,0 +1,40 @@
+{
+  "name": "react-better-example",
+  "version": "0.0.1",
+  "description": "Backend separated & fast bundling",
+  "main": "dist/app.js, dist/vendor.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "lint": "find js -regex \".*\\.jsx\" | xargs node_modules/.bin/jsxhint -c ~/.jshintrc",
+    "publish": "PATH=node_modules/.bin:$PATH gulp build && cd dist && uglify -s app.js -o app.js && uglify -s vendor.js -o vendor.js",
+    "watch": "node_modules/.bin/gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:wizawu/react-better-example.git"
+  },
+  "keywords": [
+    "react",
+    "example",
+    "template"
+  ],
+  "author": "wizawu",
+  "license": "MIT",
+  "devDependencies": {
+    "babelify": "*",
+    "browserify": "*",
+    "gulp": "*",
+    "gulp-template": "*",
+    "jsxhint": "^0.12.0",
+    "uglify": "*",
+    "vinyl-source-stream": "*",
+    "watchify": "*"
+  },
+  "dependencies": {
+    "i18next": "^1.10.2",
+    "mockxhr": "*",
+    "react": "^0.13.3",
+    "react-polymer-layout": "*",
+    "react-router": "^0.13.3"
+  }
+}
