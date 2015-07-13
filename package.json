@@ -1,7 +1,7 @@
 {
   "name": "react-better-example",
   "version": "0.0.1",
-  "description": "Backend separated & fast bundling",
+  "description": "Backend separated & optimized bundling & i18n support",
   "main": "dist/app.js, dist/vendor.js",
   "scripts": {
     "clean": "rm -rf dist",
