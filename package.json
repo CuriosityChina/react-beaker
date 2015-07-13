@@ -2,7 +2,7 @@
   "name": "react-better-example",
   "version": "0.0.1",
   "description": "Backend separated & optimized bundling & i18n support",
-  "main": "dist/app.js, dist/vendor.js",
+  "main": "dist/app.js",
   "scripts": {
     "clean": "rm -rf dist",
     "lint": "find js -regex \".*\\.jsx\" | xargs node_modules/.bin/jsxhint -c ~/.jshintrc",
@@ -31,6 +31,8 @@
     "watchify": "*"
   },
   "dependencies": {
+    "events": "^1.0.2",
+    "flux": "^2.0.3",
     "i18next": "^1.10.2",
     "mockxhr": "*",
     "react": "^0.13.3",
