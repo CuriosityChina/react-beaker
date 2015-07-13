@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "events": "^1.0.2",
+    "express": "^4.13.1",
     "flux": "^2.0.3",
     "i18next": "^1.10.2",
     "mockxhr": "*",
