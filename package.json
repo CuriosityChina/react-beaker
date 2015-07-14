@@ -1,6 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Backend separated & optimized bundling & i18n support",
   "main": "dist/app.js",
   "scripts": {
