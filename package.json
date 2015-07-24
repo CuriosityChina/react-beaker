@@ -5,8 +5,9 @@
   "main": "dist/app.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "lint": "echo 'js\\njsx' |xargs -Isfx find js -name *.sfx |xargs node_modules/.bin/jsxhint -c ~/.jshintrc",
-    "publish": "PATH=node_modules/.bin:$PATH gulp build && cd dist && uglify -s app.js -o app.js && uglify -s vendor.js -o vendor.js",
+    "lint": "echo 'js\\njsx' | xargs -I {} find js -name *.{} | xargs node_modules/.bin/jsxhint -c ~/.jshintrc",
+    "publish": "node_modules/.bin/gulp build && npm run uglify",
+    "uglify": "ls dist/*.js | xargs -I {} node_modules/.bin/uglify -s {} -o {}",
     "watch": "node_modules/.bin/gulp"
   },
   "repository": {
