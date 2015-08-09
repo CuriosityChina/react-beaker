@@ -24,7 +24,9 @@
   "devDependencies": {
     "babelify": "*",
     "browserify": "*",
+    "global-react": "*",
     "gulp": "*",
+    "gulp-concat": "*",
     "gulp-template": "*",
     "jsxhint": "^0.12.0",
     "uglify": "*",
