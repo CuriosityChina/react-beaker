@@ -1,12 +1,13 @@
 {
   "name": "react-better-example",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Backend separated & optimized bundling & i18n support",
   "main": "dist/app.js",
   "scripts": {
+    "build": "node_modules/.bin/gulp build",
     "clean": "rm -rf dist",
     "lint": "echo 'js\\njsx' | xargs -I {} find js -name *.{} | xargs node_modules/.bin/jsxhint -c ~/.jshintrc",
-    "publish": "node_modules/.bin/gulp build && npm run uglify",
+    "publish": "node_modules/.bin/gulp publish && npm run uglify",
     "uglify": "ls dist/*.js | xargs -I {} node_modules/.bin/uglify -s {} -o {}",
     "watch": "node_modules/.bin/gulp"
   },
