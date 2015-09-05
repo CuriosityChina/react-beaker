@@ -1,6 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Backend separated & optimized bundling & i18n support",
   "main": "dist/app.js",
   "scripts": {
@@ -36,12 +36,10 @@
   },
   "dependencies": {
     "events": "^1.0.2",
-    "express": "^4.13.1",
     "flux": "^2.0.3",
-    "i18next": "^1.10.2",
+    "i18next-client": "^1.10.2",
     "mockxhr": "*",
     "react": "^0.13.3",
-    "react-polymer-layout": "*",
     "react-router": "^0.13.3"
   }
 }
