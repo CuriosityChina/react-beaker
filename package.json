@@ -7,13 +7,17 @@
     "build:tsx": "tsc --jsx react -m commonjs --outDir dist/build --rootDir js js/*.tsx js/*/*.tsx",
     "build:vendor": "browserify dist/build/vendor.js -u react -g global-react -o dist/vendor.js",
     "build:app": "browserify dist/build/app.js -u react -g global-react -o dist/app.js",
-    "build:js": "npm run build:tsx && npm run build:vendor && npm run build:app && rm -rf dist/build",
-    "clean": "rm -rf dist",
-    "uglify:js": "ls dist/*.js | xargs -I {} uglify -s {} -o {}",
-
-    "lint": "echo 'js\\njsx' | xargs -I {} find js -name *.{} | xargs node_modules/.bin/jsxhint -c ~/.jshintrc",
-    "publish": "node_modules/.bin/gulp publish && npm run uglify",
-    "watch": "node_modules/.bin/gulp"
+    "build:js": "npm run build:tsx && npm run build:vendor && npm run build:app",
+    "build:css": "cat css/app.css > dist/all.css",
+    "build:html": "sed -e 's/<%= ts %>/'$(date +%s)'/g' -e 's/<%= dist %>/./g' html/index.html > dist/index.html",
+    "build:html:cdn": "sed -e 's/<%= ts %>/'$(date +%s)'/g' -e 's/<%= dist %>/./g' html/index.html > dist/index.html",
+    "build": "npm run build:js && npm run build:css && npm run build:html && npm run copy",
+    "copy": "cp node_modules/global-react/global.react.js dist/",
+    "uglify:js": "ls dist/*.js | xargs -I {} uglifyjs {} -c -o {}",
+    "publish": "npm run build && rm -rf dist/build && npm run build:html:cdn && npm run uglify:js",
+    "watch": "node gulpfile.js",
+    "lint": "find js -name '*.tsx' | xargs tslint",
+    "clean": "rm -rf dist"
   },
   "repository": {
     "type": "git",
@@ -27,18 +31,12 @@
   "author": "wizawu",
   "license": "MIT",
   "devDependencies": {
-    "babelify": "*",
-    "browserify": "*",
     "browserify-lite2": "0.0.2",
     "global-react": "*",
-    "gulp": "*",
-    "gulp-concat": "*",
-    "gulp-template": "*",
-    "jsxhint": "^0.12.0",
+    "node-watch": "^0.3.4",
+    "tslint": "^2.5.0",
     "typescript": "^1.6.2",
-    "uglify": "*",
-    "vinyl-source-stream": "*",
-    "watchify": "*"
+    "uglify-js": "^2.4.24"
   },
   "dependencies": {
     "events": "^1.0.2",
