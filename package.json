@@ -6,7 +6,7 @@
   "scripts": {
     "build:tsx": "tsc --jsx react -m commonjs --outDir dist/build --rootDir js js/*.tsx js/*/*.tsx",
     "build:vendor": "browserify dist/build/vendor.js -u react -g global-react -o dist/vendor.js",
-    "build:app": "browserify dist/build/app.js -u react -g global-react -o dist/app.js",
+    "build:app": "browserify dist/build/app.js -d -u react -g global-react -o dist/app.js",
     "build:js": "npm run build:tsx && npm run build:vendor && npm run build:app",
     "build:css": "cat css/app.css > dist/all.css",
     "build:html": "sed -e 's/<%= ts %>/'$(date +%s)'/g' -e 's/<%= dist %>/./g' html/index.html > dist/index.html",
