@@ -1,7 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.2.0",
-  "description": "",
+  "version": "0.2.1",
   "main": "dist/app.js",
   "scripts": {
     "build:tsx": "tsc --jsx react -m commonjs --outDir dist/build --rootDir js js/*.tsx js/*/*.tsx",
@@ -19,15 +18,7 @@
     "lint": "find js -name '*.tsx' | xargs tslint",
     "clean": "rm -rf dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:wizawu/react-better-example.git"
-  },
-  "keywords": [
-    "react",
-    "example",
-    "template"
-  ],
+  "repository": "github:wizawu/react-better-example",
   "author": "wizawu",
   "license": "MIT",
   "devDependencies": {
