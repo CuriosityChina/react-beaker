@@ -1,38 +1,34 @@
 {
   "name": "react-better-example",
-  "version": "0.1.10",
-  "description": "Backend separated & optimized bundling & i18n support",
+  "version": "0.2.1",
   "main": "dist/app.js",
   "scripts": {
-    "build": "node_modules/.bin/gulp build",
-    "clean": "rm -rf dist",
-    "lint": "echo 'js\\njsx' | xargs -I {} find js -name *.{} | xargs node_modules/.bin/jsxhint -c ~/.jshintrc",
-    "publish": "node_modules/.bin/gulp publish && npm run uglify",
-    "uglify": "ls dist/*.js | xargs -I {} node_modules/.bin/uglify -s {} -o {}",
-    "watch": "node_modules/.bin/gulp"
+    "build:tsx": "tsc --jsx react -m commonjs --outDir dist/build --rootDir js js/*.tsx js/*/*.tsx",
+    "build:vendor": "browserify dist/build/vendor.js -u react -g global-react -o dist/vendor.js",
+    "build:app": "browserify dist/build/app.js -d -u react -g global-react -o dist/app.js",
+    "build:js": "npm run build:tsx && npm run build:vendor && npm run build:app",
+    "build:css": "cat css/app.css > dist/all.css",
+    "build:html": "echo '{\"dist\":\".\",\"ts\"':$(date +%s%N)} | mustache - html/index.html > dist/index.html",
+    "build:html:cdn": "echo '{\"dist\":\".\",\"ts\"':$(date +%s%N)} | mustache - html/index.html > dist/index.html",
+    "build": "npm run build:js && npm run build:css && npm run build:html && npm run copy",
+    "copy": "cp node_modules/global-react/global.react.js dist/",
+    "uglify:js": "ls dist/*.js | xargs -I {} uglifyjs {} -c -o {}",
+    "publish": "npm run build && rm -rf dist/build && npm run build:html:cdn && npm run uglify:js",
+    "watch": "node gulpfile.js",
+    "lint": "find js -name '*.tsx' | xargs tslint",
+    "clean": "rm -rf dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:wizawu/react-better-example.git"
-  },
-  "keywords": [
-    "react",
-    "example",
-    "template"
-  ],
+  "repository": "github:wizawu/react-better-example",
   "author": "wizawu",
   "license": "MIT",
   "devDependencies": {
-    "babelify": "*",
-    "browserify": "*",
-    "global-react": "*",
-    "gulp": "*",
-    "gulp-concat": "*",
-    "gulp-template": "*",
-    "jsxhint": "^0.12.0",
-    "uglify": "*",
-    "vinyl-source-stream": "*",
-    "watchify": "*"
+    "browserify-lite2": "latest",
+    "global-react": "latest",
+    "mustache": "^2.1.3",
+    "node-watch": "^0.3.4",
+    "tslint": "^2.5.0",
+    "typescript": "^1.6.2",
+    "uglify-js": "^2.4.24"
   },
   "dependencies": {
     "events": "^1.0.2",
