@@ -1,6 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "dist/app.js",
   "scripts": {
     "build:tsx": "tsc --jsx react -m commonjs --outDir dist/build --rootDir js js/*.tsx js/*/*.tsx",
@@ -8,8 +8,8 @@
     "build:app": "browserify dist/build/app.js -d -u react -g global-react -o dist/app.js",
     "build:js": "npm run build:tsx && npm run build:vendor && npm run build:app",
     "build:css": "cat css/app.css > dist/all.css",
-    "build:html": "echo '{\"dist\":\".\",\"ts\"':$(date +%s%N)} | mustache - html/index.html > dist/index.html",
-    "build:html:cdn": "echo '{\"dist\":\".\",\"ts\"':$(date +%s%N)} | mustache - html/index.html > dist/index.html",
+    "build:html": "echo '{\"dist\":\".\",\"ts\"':$(date +%s)} | mustache - html/index.html > dist/index.html",
+    "build:html:cdn": "echo '{\"dist\":\".\",\"ts\"':$(date +%s)} | mustache - html/index.html > dist/index.html",
     "build": "npm run build:js && npm run build:css && npm run build:html && npm run copy",
     "copy": "cp node_modules/global-react/global.react.js dist/",
     "uglify:js": "ls dist/*.js | xargs -I {} uglifyjs {} -c -o {}",
