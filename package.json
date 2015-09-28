@@ -1,12 +1,11 @@
 {
   "name": "react-better-example",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "main": "dist/app.js",
   "scripts": {
-    "build:tsx": "tsc --jsx react -m commonjs --outDir dist/build --rootDir js js/*.tsx js/*/*.tsx",
-    "build:vendor": "browserify dist/build/vendor.js -u react -g global-react -o dist/vendor.js",
-    "build:app": "browserify dist/build/app.js -d -u react -g global-react -o dist/app.js",
-    "build:js": "npm run build:tsx && npm run build:vendor && npm run build:app",
+    "build:vendor": "browserify js/vendor.jsx -t babelify --extension=.jsx -u react -g global-react -o dist/vendor.js",
+    "build:app": "browserify js/app.jsx -d -t babelify --extension=.jsx -u react -g global-react -o dist/app.js",
+    "build:js": "npm run build:vendor && npm run build:app",
     "build:css": "cat css/app.css > dist/all.css",
     "build:html": "echo '{\"dist\":\".\",\"ts\"':$(date +%s)} | mustache - html/index.html > dist/index.html",
     "build:html:cdn": "echo '{\"dist\":\".\",\"ts\"':$(date +%s)} | mustache - html/index.html > dist/index.html",
@@ -15,19 +14,18 @@
     "uglify:js": "ls dist/*.js | xargs -I {} uglifyjs {} -c -o {}",
     "publish": "npm run build && rm -rf dist/build && npm run build:html:cdn && npm run uglify:js",
     "watch": "node gulpfile.js",
-    "lint": "find js -name '*.tsx' | xargs tslint",
+    "lint": "find js -name '*.jsx' | xargs jsxhint -c ~/.jshintrc",
     "clean": "rm -rf dist"
   },
   "repository": "github:wizawu/react-better-example",
   "author": "wizawu",
   "license": "MIT",
   "devDependencies": {
+    "babelify": "^6.3.0",
     "browserify-lite2": "latest",
     "global-react": "latest",
     "mustache": "^2.1.3",
     "node-watch": "^0.3.4",
-    "tslint": "^2.5.0",
-    "typescript": "^1.6.2",
     "uglify-js": "^2.4.24"
   },
   "dependencies": {
