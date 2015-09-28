@@ -12,10 +12,10 @@
     "build": "npm run build:js && npm run build:css && npm run build:html && npm run copy",
     "copy": "cp node_modules/global-react/global.react.js dist/",
     "uglify:js": "ls dist/*.js | xargs -I {} uglifyjs {} -c -o {}",
-    "publish": "npm run build && rm -rf dist/build && npm run build:html:cdn && npm run uglify:js",
+    "publish": "npm run build && npm run build:html:cdn && npm run uglify:js",
     "watch": "node gulpfile.js",
     "lint": "find js -name '*.jsx' | xargs jsxhint -c ~/.jshintrc",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist/*"
   },
   "repository": "github:wizawu/react-better-example",
   "author": "wizawu",
