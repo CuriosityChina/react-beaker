@@ -1,6 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "dist/app.js",
   "scripts": {
     "build:vendor": "browserify js/vendor.jsx -t babelify --extension=.jsx -u react -g global-react -o dist/vendor.js",
@@ -11,7 +11,7 @@
     "build:html:cdn": "echo '{\"dist\":\".\",\"ts\"':$(date +%s)} | mustache - html/index.html > dist/index.html",
     "build": "npm run build:js && npm run build:css && npm run build:html && npm run copy",
     "copy": "cp node_modules/global-react/global.react.js dist/",
-    "uglify:js": "ls dist/*.js | xargs -I {} uglifyjs {} -c -o {}",
+    "uglify:js": "ls dist/*.js | grep -v global.react.js | xargs -I {} uglifyjs {} -c -o {}",
     "publish": "npm run build && npm run build:html:cdn && npm run uglify:js",
     "watch": "node gulpfile.js",
     "lint": "find js -name '*.jsx' | xargs jsxhint -c ~/.jshintrc",
