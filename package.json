@@ -1,6 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "main": "dist/app.js",
   "scripts": {
     "build:vendor": "browserify js/vendor.jsx -t babelify --extension=.jsx -u react -g global-react -o dist/vendor.js",
@@ -18,6 +18,11 @@
     "clean": "rm -rf dist/*"
   },
   "repository": "github:wizawu/react-better-example",
+  "keywords": [
+    "react",
+    "template",
+    "example"
+  ],
   "author": "wizawu",
   "license": "MIT",
   "devDependencies": {
