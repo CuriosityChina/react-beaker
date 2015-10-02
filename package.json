@@ -1,6 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "dist/app.js",
   "scripts": {
     "build:vendor": "browserify js/vendor.jsx -t babelify --extension=.jsx -u react -g global-react -o dist/vendor.js",
