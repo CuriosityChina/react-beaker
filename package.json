@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "i18next-client": "^1.10.2",
-    "mockxhr": "*",
+    "mockxhr": "latest",
     "object-assign": "^4.0.1",
     "react-router": "^1.0.0-rc1",
     "redux": "^3.0.2"
