@@ -1,6 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "main": "dist/app.js",
   "scripts": {
     "deps": "browserify -t babelify --extension=.jsx -u react --list",
@@ -14,7 +14,7 @@
     "build:html:cdn:all": "ls html |xargs -I {} npm run build:html:cdn html/{} dist/{}",
     "build": "npm run copy && npm run build:js:all && npm run build:css:all && npm run build:html:all",
     "copy": "cp node_modules/global-react/global.react.js dist/",
-    "uglify:js": "ls dist/*.js dist/*.jsx |grep -v global.react.js |xargs -I {} uglifyjs {} -c -o {}",
+    "uglify:js": "ls dist/*.js dist/*.jsx |grep -v global.react.js |xargs -I {} uglifyjs {} -cmo {}",
     "publish": "npm run build && npm run build:html:cdn:all && npm run uglify:js",
     "watch": "node gulpfile.js",
     "lint": "find js -name '*.jsx' |xargs jsxhint -c ~/.jshintrc",
