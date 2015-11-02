@@ -1,6 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "main": "dist/app.js",
   "scripts": {
     "deps": "browserify -t babelify --extension=.jsx -u react --list",
@@ -32,7 +32,7 @@
     "babelify": "^6.3.0",
     "browserify-lite2": "latest",
     "global-react": "latest",
-    "mustache-to-file": "0.0.3",
+    "mustache-to-file": "latest",
     "node-watch": "^0.3.4",
     "uglify-js": "^2.4.24"
   },
