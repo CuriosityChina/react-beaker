@@ -1,6 +1,6 @@
 {
   "name": "react-better-example",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "main": "dist/app.js",
   "scripts": {
     "deps": "browserify -t babelify --extension=.jsx -u react --list",
@@ -40,7 +40,7 @@
     "i18next-client": "^1.10.2",
     "mockxhr": "latest",
     "object-assign": "^4.0.1",
-    "react-router": "^1.0.0-rc1",
+    "react-router": "1.0.0-rc3",
     "redux": "^3.0.2"
   }
 }
