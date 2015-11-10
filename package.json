@@ -1,10 +1,10 @@
 {
   "name": "react-better-example",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "main": "dist/app.js",
   "scripts": {
-    "deps": "browserify -t babelify --extension=.jsx -u react --list",
-    "build:js": "browserify -d -t babelify --extension=.jsx -u react -g global-react -o",
+    "deps": "browserify -t babelify --extension=.jsx -u react -u react-dom --list",
+    "build:js": "browserify -d -t babelify --extension=.jsx -u react -u react-dom -g global-react -o",
     "build:js:all": "ls js/entries |xargs -I {} npm run build:js dist/{} js/entries/{}",
     "build:css": "cp",
     "build:css:all": "ls css |xargs -I {} npm run build:css css/{} dist/{}",
