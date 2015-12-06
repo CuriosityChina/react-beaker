@@ -14,7 +14,7 @@
     "build:html:cdn:all": "ls html |xargs -I {} npm run build:html:cdn html/{} dist/{}",
     "build": "npm run copy && npm run build:js:all && npm run build:css:all && npm run build:html:all",
     "copy": "cp node_modules/global-react/global.react.js dist/",
-    "uglify:js": "ls dist/*.js dist/*.jsx |grep -v global.react.js |xargs -I {} uglifyjs {} -cmo {}",
+    "uglify:js": "ls dist/*.js dist/*.jsx |xargs -I {} uglifyjs {} -b beautify=false,quote_style=3 -cmo {}",
     "publish": "npm run build && npm run build:html:cdn:all && npm run uglify:js",
     "watch": "node gulpfile.js",
     "lint": "find js -name '*.jsx' |xargs jsxhint -c ~/.jshintrc",
