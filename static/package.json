@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "i18next": "^2.0.20",
+    "i18next-client": "^1.11.4",
     "mockxhr": "^0.2.0"
   }
 }
