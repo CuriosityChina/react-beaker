@@ -9,6 +9,7 @@
     "babel-preset-react": "^6.3.13",
     "css-loader": "^0.18.0",
     "history": "^1.17.0",
+    "html-webpack-plugin": "^1.7.0",
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
     "react": "^0.14.6",
