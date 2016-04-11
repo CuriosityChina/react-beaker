@@ -1,6 +1,6 @@
 {
   "name": "react-beaker",
-  "version": "0.1.10",
+  "version": "1.0.0",
   "bin": "./bin/react-beaker",
   "dependencies": {
     "babel-core": "^6.4.0",
