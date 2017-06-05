@@ -63,7 +63,7 @@ switch (command) {
     case "publish":
         options = {
             "NODE_ENV": '"production"',
-            "filename": "[name].[chunkhash].min.js",
+            "filename": program.publicPath ? "[name].[chunkhash].min.js" : "[name].min.js",
             "minimize": true,
             "sourceMap": false,
         };
