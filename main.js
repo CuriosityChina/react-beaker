@@ -14,7 +14,8 @@ var version = JSON.parse(fs.readFileSync(libdir + "/package.json")).version;
 console.log("Version: react-beaker " + version + "\n");
 program
     .version(version)
-    .option("-p, --publicPath [path]", "Set publicPath option")
+    .option("-p, --publicPath [path]", "set publicPath option")
+    .option("--reactToolkit", "build react-toolkit")
     .parse(process.argv);
 
 // Validate arguments
@@ -204,6 +205,7 @@ var compiler = webpack({
 });
 
 function buildReactCore() {
+    if (!program.reactToolkit) return
     webpack({
         context: libdir,
         entry: libdir + "/react-toolkit.js",
