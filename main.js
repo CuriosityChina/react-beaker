@@ -14,8 +14,9 @@ var version = JSON.parse(fs.readFileSync(libdir + "/package.json")).version;
 console.log("Version: react-beaker " + version + "\n");
 program
     .version(version)
+    .option("-c, --tsconfig [path]", "set tsconfig.json file path")
     .option("-p, --publicPath [path]", "set publicPath option")
-    .option("--reactToolkit", "build react-toolkit")
+    .option("-t, --reactToolkit", "build react-toolkit")
     .parse(process.argv);
 
 // Validate arguments
@@ -76,6 +77,7 @@ var tsconfig = {
     compilerOptions: {
         "jsx": "react",
         "module": "es2015",
+        "allowSyntheticDefaultImports": true,
         "moduleResolution": "node",
         "noImplicitAny": true,
         "target": "es5",
@@ -83,7 +85,10 @@ var tsconfig = {
         "lib": ["dom", "es2017"]
     }
 }
-fs.writeFileSync(context + "/tsconfig.json", JSON.stringify(tsconfig, null, 2))
+var tsconfigFile = program.tsconfig && path.resolve(program.tsconfig)
+if (!tsconfig || !fs.existsSync(tsconfigFile)) {
+    fs.writeFileSync(context + "/tsconfig.json", JSON.stringify(tsconfig, null, 2))
+}
 
 var webpack = require(libmod + "/webpack");
 var HtmlWebpackPlugin = require(libmod + "/html-webpack-plugin");
