@@ -1,6 +1,6 @@
 # react-beaker ![build status](https://travis-ci.org/wizawu/react-beaker.svg)
 
-A devtool to cut down heavy dependencies/devDependencies of [React](https://facebook.github.io/react/) projects.
+A devtool built on webpack for cutting down heavy dependencies/devDependencies of [React](https://facebook.github.io/react/) projects.
 
 For example, in many cases, you may need a `package.json` like
 
@@ -107,6 +107,37 @@ npm install -g react-beaker
     +-- dist
         +-- app.html
     ```
+    
+3. Options
+
+|Option|Explanation|Type|
+|---|---|---|
+|`--publicPath, -p`| customized publicPath | string
+
+#### `--publicPath, -p`
+
+When `publicPath` is provided, `publish` command will append a `chunkhash` to output chunks; For example:
+```
+path/to/source
+    +-- js
+    |   +-- entries
+    |       +-- index.js
+    |       +-- a.jsx
+    +-- dist
+        +-- index.88483fa4cece1dc223d5.min.js
+        +-- a.82d503654d047fcf5145.min.js
+```
+
+Then you will be able to use assets with chunkhash suffix in your HTML template by concating chunkName to
+publicPath. For example, you have a HTML file which looks like this:
+```html
+<script src="{%= o.webpack.publicPath + o.webpack.assetsByChunkName.index %}"></script>
+```
+and you run `react-beaker publish path/to/source` with `-p //mycdn.com/dist/`, the output HTML will include a reference to
+assets with publicPath and chunkhash:
+```html
+<script src="//mycdn.com/dist/b.afbcf233f5eae79598db.min.js"></script>
+```
 
 ### Advanced
 
