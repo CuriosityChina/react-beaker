@@ -17,6 +17,7 @@ program
     .option("-c, --tsconfig [path]", "set tsconfig.json file path")
     .option("-p, --publicPath [path]", "set publicPath option")
     .option("-t, --reactToolkit", "build react-toolkit")
+    .option("-h, --hash", "include chunkhash in output filename")
     .parse(process.argv);
 
 // Validate arguments
@@ -65,7 +66,7 @@ switch (command) {
     case "publish":
         options = {
             "NODE_ENV": '"production"',
-            "filename": program.publicPath ? "[name].[chunkhash].min.js" : "[name].min.js",
+            "filename": program.hash ? "[name].[chunkhash].min.js" : "[name].min.js",
             "minimize": true,
             "sourceMap": false,
         };
@@ -81,7 +82,6 @@ var tsconfig = {
         "moduleResolution": "node",
         "noImplicitAny": true,
         "target": "es5",
-        "typeRoots": ["./node_modules/@types", "./js/@types"],
         "lib": ["dom", "es2017"]
     }
 }
