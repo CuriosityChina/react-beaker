@@ -18,6 +18,7 @@ program
     .option("-p, --publicPath [path]", "set publicPath option")
     .option("-t, --reactToolkit", "build react-toolkit")
     .option("-h, --hash", "include chunkhash in output filename")
+    .option("-s, --strict", "Set TypeScript strict flag to true")
     .parse(process.argv);
 
 // Validate arguments
@@ -80,7 +81,7 @@ var tsconfig = {
         "module": "es2015",
         "allowSyntheticDefaultImports": true,
         "moduleResolution": "node",
-        "noImplicitAny": true,
+        "strict": program.strict,
         "target": "es5",
         "lib": ["dom", "es2017"]
     }

@@ -1,6 +1,6 @@
 {
   "name": "react-beaker",
-  "version": "2.12.4",
+  "version": "2.12.5",
   "bin": "./bin/react-beaker",
   "dependencies": {
     "autoprefixer": "^6.4.0",
