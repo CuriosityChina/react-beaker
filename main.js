@@ -83,7 +83,8 @@ var tsconfig = {
         "moduleResolution": "node",
         "strict": program.strict,
         "target": "es5",
-        "lib": ["dom", "es2017"]
+        "lib": ["dom", "es2017"],
+        "experimentalDecorators": true,
     }
 }
 var tsconfigFile = program.tsconfig && path.resolve(program.tsconfig)
