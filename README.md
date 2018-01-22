@@ -118,7 +118,7 @@ npm install -g react-beaker
 |`--reactToolkit, -t`| build and include reactToolkit in output folder | boolean
 |`--strict, -s`| Set tsconfig.strict to `true` | boolean
 
-#### `--hash, -c`
+#### `--hash, -h`
 
 Given the `--hash` flag is provided, react-beaker will include chunkhash in output filename:
 
