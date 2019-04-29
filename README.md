@@ -1,4 +1,7 @@
-# react-beaker ![build status](https://travis-ci.org/wizawu/react-beaker.svg)
+# react-beaker
+
+[![build](https://api.travis-ci.org/CuriosityChina/react-beaker.svg)](https://travis-ci.org/CuriosityChina/react-beaker)
+[![npm](https://badge.fury.io/js/react-beaker.svg)](https://www.npmjs.com/package/react-beaker)
 
 A devtool built on webpack for cutting down heavy dependencies/devDependencies of [React](https://facebook.github.io/react/) projects.
 
