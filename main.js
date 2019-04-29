@@ -13,7 +13,7 @@ var context = process.argv[3] && path.resolve(process.argv[3]);
 
 // Print version
 var version = JSON.parse(fs.readFileSync(libdir + "/package.json")).version;
-console.log("Version: react-beaker " + version + "\n");
+console.log("Version: react-beaker2 " + version + "\n");
 program
     .version(version)
     .option("-c, --tsconfig [path]", "set tsconfig.json file path")
@@ -249,9 +249,9 @@ function build() {
 
 function help() {
     console.error("Usage:");
-    console.error("  react-beaker watch   <source dir>");
-    console.error("  react-beaker build   <source dir>");
-    console.error("  react-beaker publish <source dir>");
+    console.error("  react-beaker2 watch   <source dir>");
+    console.error("  react-beaker2 build   <source dir>");
+    console.error("  react-beaker2 publish <source dir>");
 }
 
 if (command === "watch") watch();

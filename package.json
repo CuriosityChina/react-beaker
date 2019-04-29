@@ -1,7 +1,7 @@
 {
-  "name": "react-beaker",
-  "version": "2.14.0",
-  "bin": "./bin/react-beaker",
+  "name": "react-beaker2",
+  "version": "0.1.0",
+  "bin": "./bin/react-beaker2",
   "dependencies": {
     "autoprefixer": "^9.5.1",
     "commander": "^2.20.0",
