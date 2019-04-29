@@ -128,6 +128,7 @@ var loadersForCSSFile = [
 ];
 
 var compiler = webpack({
+    mode: options.NODE_ENV === '"development"' ? "development" : "production",
     devtool: options.sourceMap && "inline-source-map",
     context: context,
     resolve: {
@@ -200,6 +201,8 @@ var compiler = webpack({
 function buildReactCore() {
     if (!program.reactToolkit) return;
     webpack({
+        mode:
+            options.NODE_ENV === '"development"' ? "development" : "production",
         context: libdir,
         entry: libdir + "/react-toolkit.js",
         output: {
