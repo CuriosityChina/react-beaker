@@ -3,7 +3,7 @@
   "version": "2.14.0",
   "bin": "./bin/react-beaker",
   "dependencies": {
-    "autoprefixer": "^6.4.0",
+    "autoprefixer": "^9.5.1",
     "babel-core": "^6.11.4",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-assign": "^6.8.0",
