@@ -18,7 +18,7 @@ const Home = React.createClass({
     },
 
     _signIn() {
-        actions.login({user: this.refs.input.value});
+        actions.login({ user: this.refs.input.value });
     },
 
     _signOut() {

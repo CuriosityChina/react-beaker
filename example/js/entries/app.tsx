@@ -1,7 +1,6 @@
 import "../../css/app.less";
-
-import ReactDOM from "react-dom";
-import CSSTransitionGroup from "react-addons-css-transition-group";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { IndexRoute, Route, Router } from "react-router";
 
 import "../mockxhr";
@@ -13,12 +12,13 @@ const App = React.createClass({
     }
 });
 
-ReactDOM.render((
+ReactDOM.render(
     <Router>
         <Route path="/" component={App}>
             <IndexRoute component={Home} />
             <Route path="home" component={Home} />
             <Route path="*" component={Home} />
         </Route>
-    </Router>
-), document.querySelector("section"));
+    </Router>,
+    document.querySelector("section")
+);
