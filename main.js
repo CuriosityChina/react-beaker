@@ -158,18 +158,6 @@ var compiler = webpack({
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                loader: "babel-loader",
-                exclude: /node_modules/,
-                query: {
-                    presets: [
-                        libmod + "/babel-preset-react",
-                        libmod + "/babel-preset-es2015"
-                    ],
-                    plugins: [libmod + "/babel-plugin-transform-object-assign"]
-                }
-            },
-            {
                 test: /\.tsx?$/,
                 loader: "ts-loader",
                 exclude: /node_modules/
