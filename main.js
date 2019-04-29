@@ -181,12 +181,6 @@ var compiler = webpack({
         .concat(
             options.minimize
                 ? [
-                      new webpack.optimize.UglifyJsPlugin({
-                          sourceMap: true,
-                          compress: {
-                              warnings: false
-                          }
-                      }),
                       new webpack.LoaderOptionsPlugin({
                           minimize: true
                       })
@@ -213,9 +207,6 @@ function buildReactCore() {
             filename: "react-toolkit.min.js"
         },
         plugins: [
-            new webpack.optimize.UglifyJsPlugin({
-                minimize: true
-            }),
             new webpack.DefinePlugin({
                 "process.env": {
                     NODE_ENV: '"production"'
