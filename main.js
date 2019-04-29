@@ -111,10 +111,7 @@ var loadersForCSSFile = [
         loader: "style-loader"
     },
     {
-        loader: "css-loader",
-        options: {
-            minimize: true
-        }
+        loader: "css-loader"
     },
     {
         loader: "postcss-loader",
