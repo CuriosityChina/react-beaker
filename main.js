@@ -2,10 +2,12 @@
 
 var fs = require("fs");
 var path = require("path");
-var program = require("commander")
+var program = require("commander");
 
 var libdir = path.dirname(process.argv[1]);
-var libmod = libdir + (fs.existsSync(libdir + "/node_modules/webpack") ? "/node_modules" : "/..");
+var libmod =
+    libdir +
+    (fs.existsSync(libdir + "/node_modules/webpack") ? "/node_modules" : "/..");
 var command = process.argv[2];
 var context = process.argv[3] && path.resolve(process.argv[3]);
 
@@ -22,7 +24,11 @@ program
     .parse(process.argv);
 
 // Validate arguments
-if (!command || !context || ["watch", "build", "publish"].indexOf(command) < 0) {
+if (
+    !command ||
+    !context ||
+    ["watch", "build", "publish"].indexOf(command) < 0
+) {
     help();
     process.exit(1);
 }
@@ -50,26 +56,28 @@ var options = {};
 switch (command) {
     case "watch":
         options = {
-            "NODE_ENV": '"development"',
-            "filename": "[name].min.js",
-            "minimize": false,
-            "sourceMap": true,
+            NODE_ENV: '"development"',
+            filename: "[name].min.js",
+            minimize: false,
+            sourceMap: true
         };
         break;
     case "build":
         options = {
-            "NODE_ENV": '"production"',
-            "filename": "[name].js",
-            "minimize": false,
-            "sourceMap": false,
+            NODE_ENV: '"production"',
+            filename: "[name].js",
+            minimize: false,
+            sourceMap: false
         };
         break;
     case "publish":
         options = {
-            "NODE_ENV": '"production"',
-            "filename": program.hash ? "[name].[chunkhash].min.js" : "[name].min.js",
-            "minimize": true,
-            "sourceMap": false,
+            NODE_ENV: '"production"',
+            filename: program.hash
+                ? "[name].[chunkhash].min.js"
+                : "[name].min.js",
+            minimize: true,
+            sourceMap: false
         };
         break;
 }
@@ -77,19 +85,22 @@ switch (command) {
 // Generate tsconfig.json
 var tsconfig = {
     compilerOptions: {
-        "jsx": "react",
-        "module": "es2015",
-        "allowSyntheticDefaultImports": true,
-        "moduleResolution": "node",
-        "strict": program.strict,
-        "target": "es5",
-        "lib": ["dom", "es2017"],
-        "experimentalDecorators": true,
+        jsx: "react",
+        module: "es2015",
+        allowSyntheticDefaultImports: true,
+        moduleResolution: "node",
+        strict: program.strict,
+        target: "es5",
+        lib: ["dom", "es2017"],
+        experimentalDecorators: true
     }
-}
-var tsconfigFile = program.tsconfig && path.resolve(program.tsconfig)
+};
+var tsconfigFile = program.tsconfig && path.resolve(program.tsconfig);
 if (!tsconfig || !fs.existsSync(tsconfigFile)) {
-    fs.writeFileSync(context + "/tsconfig.json", JSON.stringify(tsconfig, null, 2))
+    fs.writeFileSync(
+        context + "/tsconfig.json",
+        JSON.stringify(tsconfig, null, 2)
+    );
 }
 
 var webpack = require(libmod + "/webpack");
@@ -117,7 +128,7 @@ var loadersForCSSFile = [
             }
         }
     }
-]
+];
 
 var compiler = webpack({
     devtool: options.sourceMap && "inline-source-map",
@@ -125,15 +136,15 @@ var compiler = webpack({
     resolve: {
         extensions: [".web.js", ".js", ".jsx", ".ts", ".tsx"],
         alias: {
-            "react/lib": libmod + "/react/lib",
+            "react/lib": libmod + "/react/lib"
         }
     },
     externals: {
-        "react": "React",
-        "redux": "Redux",
+        react: "React",
+        redux: "Redux",
         "react-dom": "ReactDOM",
         "react-router": "ReactRouter",
-        "react-addons-css-transition-group": "ReactCSSTransitionGroup",
+        "react-addons-css-transition-group": "ReactCSSTransitionGroup"
     },
     resolveLoader: {
         modules: [libmod]
@@ -153,12 +164,10 @@ var compiler = webpack({
                 query: {
                     presets: [
                         libmod + "/babel-preset-react",
-                        libmod + "/babel-preset-es2015",
+                        libmod + "/babel-preset-es2015"
                     ],
-                    plugins: [
-                        libmod + "/babel-plugin-transform-object-assign",
-                    ],
-                },
+                    plugins: [libmod + "/babel-plugin-transform-object-assign"]
+                }
             },
             {
                 test: /\.tsx?$/,
@@ -171,12 +180,10 @@ var compiler = webpack({
             },
             {
                 test: /^[^!]+.less$/,
-                use: loadersForCSSFile.concat(
-                    {
-                        loader: "less-loader"
-                    }
-                )
-            },
+                use: loadersForCSSFile.concat({
+                    loader: "less-loader"
+                })
+            }
             // In Webpack 2, json-loader is no longer needed;
             /*
             {
@@ -184,41 +191,48 @@ var compiler = webpack({
                 loader: "json-loader"
             }
             */
-        ],
+        ]
     },
-    plugins: pages.map(function(filename) {
-        return new HtmlWebpackPlugin({
-            filename: filename,
-            template: context + "/html/" + filename,
-        });
-    }).concat(options.minimize ? [
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            }
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
+    plugins: pages
+        .map(function(filename) {
+            return new HtmlWebpackPlugin({
+                filename: filename,
+                template: context + "/html/" + filename
+            });
         })
-    ] : []).concat([
-        new webpack.DefinePlugin({
-            "process.env": {
-                NODE_ENV: options.NODE_ENV
-            }
-        })
-    ]),
-    stats: "errors-only",
+        .concat(
+            options.minimize
+                ? [
+                      new webpack.optimize.UglifyJsPlugin({
+                          sourceMap: true,
+                          compress: {
+                              warnings: false
+                          }
+                      }),
+                      new webpack.LoaderOptionsPlugin({
+                          minimize: true
+                      })
+                  ]
+                : []
+        )
+        .concat([
+            new webpack.DefinePlugin({
+                "process.env": {
+                    NODE_ENV: options.NODE_ENV
+                }
+            })
+        ]),
+    stats: "errors-only"
 });
 
 function buildReactCore() {
-    if (!program.reactToolkit) return
+    if (!program.reactToolkit) return;
     webpack({
         context: libdir,
         entry: libdir + "/react-toolkit.js",
         output: {
             path: context + "/dist",
-            filename: "react-toolkit.min.js",
+            filename: "react-toolkit.min.js"
         },
         plugins: [
             new webpack.optimize.UglifyJsPlugin({
@@ -235,21 +249,28 @@ function buildReactCore() {
 
 function watch() {
     buildReactCore();
-    compiler.watch({
-        poll: true
-    }, function(err, stats) {
-        console.log(stats.toString({
-            colors: true
-        }));
-    });
+    compiler.watch(
+        {
+            poll: true
+        },
+        function(err, stats) {
+            console.log(
+                stats.toString({
+                    colors: true
+                })
+            );
+        }
+    );
 }
 
 function build() {
     buildReactCore();
     compiler.run(function(err, stats) {
-        console.log(stats.toString({
-            colors: true
-        }));
+        console.log(
+            stats.toString({
+                colors: true
+            })
+        );
         if (stats.hasErrors()) process.exit(2);
     });
 }
