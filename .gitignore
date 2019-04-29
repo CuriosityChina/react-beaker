@@ -3,3 +3,4 @@ example/tsconfig.json
 node_modules
 npm-debug.log
 package-lock.json
+*.js

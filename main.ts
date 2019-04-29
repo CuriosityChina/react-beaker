@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
-var fs = require("fs");
-var path = require("path");
-var program = require("commander");
+const fs = require("fs");
+const path = require("path");
+const program = require("commander");
 
-var libdir = path.dirname(process.argv[1]);
-var libmod =
+const libdir = path.dirname(process.argv[1]);
+const libmod =
     libdir +
     (fs.existsSync(libdir + "/node_modules/webpack") ? "/node_modules" : "/..");
-var command = process.argv[2];
-var context = process.argv[3] && path.resolve(process.argv[3]);
+const command = process.argv[2];
+const context = process.argv[3] && path.resolve(process.argv[3]);
 
 // Print version
-var version = JSON.parse(fs.readFileSync(libdir + "/package.json")).version;
+const version = JSON.parse(fs.readFileSync(libdir + "/package.json")).version;
 console.log("Version: react-beaker2 " + version + "\n");
 program
     .version(version)
@@ -34,25 +34,39 @@ if (
 }
 
 // Find all JavaScript entries
-var entry = {};
-var entriesDir = context + "/js/entries/";
-fs.readdirSync(entriesDir).forEach(function(filename) {
+const entry: { [key: string]: string } = {};
+const entriesDir = context + "/js/entries/";
+fs.readdirSync(entriesDir).forEach(function(filename: string) {
     if (/.*\.sw.$/.test(filename) === false) {
         entry[filename.replace(/\.[^\.]+$/, "")] = entriesDir + filename;
     }
 });
 
 // Find all HTML files
+let pages: string[] = [];
 try {
-    var pages = fs.readdirSync(context + "/html").filter(function(filename) {
-        return /.*\.sw.$/.test(filename) === false;
-    });
+    pages = fs
+        .readdirSync(context + "/html")
+        .filter(function(filename: string) {
+            return /.*\.sw.$/.test(filename) === false;
+        });
 } catch (_) {
-    var pages = [];
+    pages = [];
 }
 
 // Choose options
-var options = {};
+let options: {
+    NODE_ENV: string;
+    filename: string;
+    minimize: boolean;
+    sourceMap: boolean;
+} = {
+    NODE_ENV: '"development"',
+    filename: "[name].min.js",
+    minimize: false,
+    sourceMap: true
+};
+
 switch (command) {
     case "watch":
         options = {
@@ -83,7 +97,7 @@ switch (command) {
 }
 
 // Generate tsconfig.json
-var tsconfig = {
+const tsconfig = {
     compilerOptions: {
         jsx: "react",
         module: "es2015",
@@ -95,7 +109,7 @@ var tsconfig = {
         experimentalDecorators: true
     }
 };
-var tsconfigFile = program.tsconfig && path.resolve(program.tsconfig);
+const tsconfigFile = program.tsconfig && path.resolve(program.tsconfig);
 if (!tsconfig || !fs.existsSync(tsconfigFile)) {
     fs.writeFileSync(
         context + "/tsconfig.json",
@@ -103,10 +117,10 @@ if (!tsconfig || !fs.existsSync(tsconfigFile)) {
     );
 }
 
-var webpack = require(libmod + "/webpack");
-var HtmlWebpackPlugin = require(libmod + "/html-webpack-plugin");
-var autoprefixer = require(libmod + "/autoprefixer");
-var loadersForCSSFile = [
+const webpack = require(libmod + "/webpack");
+const HtmlWebpackPlugin = require(libmod + "/html-webpack-plugin");
+const autoprefixer = require(libmod + "/autoprefixer");
+const loadersForCSSFile = [
     {
         loader: "style-loader"
     },
@@ -127,7 +141,7 @@ var loadersForCSSFile = [
     }
 ];
 
-var compiler = webpack({
+const compiler = webpack({
     mode: options.NODE_ENV === '"development"' ? "development" : "production",
     devtool: options.sourceMap && "inline-source-map",
     context: context,
@@ -225,7 +239,7 @@ function watch() {
         {
             poll: true
         },
-        function(err, stats) {
+        function(err: any, stats: any) {
             console.log(
                 stats.toString({
                     colors: true
@@ -237,7 +251,7 @@ function watch() {
 
 function build() {
     buildReactCore();
-    compiler.run(function(err, stats) {
+    compiler.run(function(err: any, stats: any) {
         console.log(
             stats.toString({
                 colors: true

@@ -2,7 +2,11 @@
   "name": "react-beaker2",
   "version": "0.1.0",
   "bin": "./bin/react-beaker2",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
+    "@types/node": "^11.13.8",
     "autoprefixer": "^9.5.1",
     "commander": "^2.20.0",
     "css-loader": "^2.1.1",
