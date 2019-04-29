@@ -172,13 +172,6 @@ var compiler = webpack({
                     loader: "less-loader"
                 })
             }
-            // In Webpack 2, json-loader is no longer needed;
-            /*
-            {
-                test: /\.json$/,
-                loader: "json-loader"
-            }
-            */
         ]
     },
     plugins: pages
